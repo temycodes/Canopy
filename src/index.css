@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Carter+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+
+:root {
+  --bs-primary: #4b0082; /* new orange primary */
+}
+
+body {
+  background-color: #f8f9faa8;
+  font-family: "Nunito", sans-serif;
+}
+
+.btn-primary {
+  background-color: #da70d6;
+  border-color: #da70d6;
+}
+
+.btn-primary:hover {
+  background-color: #c65db8;
+  border-color: #c65db8;
+}
+
+.shadow-hover {
+  transition: box-shadow 0.5s ease;
+}
+
+.shadow-hover:hover {
+  box-shadow: var(--bs-box-shadow-lg) !important;
+}
+
+.highlighted {
+  box-shadow: 0 0 10px 2px #ff69b4 !important;
+  transition: box-shadow 0.5s ease;
+}
+
+.logo {
+  font-family: "Carter One", cursive;
+  color: var(--bs-primary);
+  font-size: 3rem;
+}
