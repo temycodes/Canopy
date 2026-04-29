@@ -93,7 +93,7 @@ const TeamForm: React.FC<TeamFormProps> = ({ isEdit = false }) => {
       <Row className='justify-content-center'>
         <Col lg={8}>
           <Card className='shadow-lg'>
-            <Card.Header className='bg-primary text-white'>
+            <Card.Header className='text-white' style={{ backgroundColor: "#da70d6" }}>
               <h3 className='mb-0'>{isEdit ? "Edit Team Member" : "Add Team Member"}</h3>
             </Card.Header>
             <Card.Body>
@@ -210,7 +210,7 @@ const TeamForm: React.FC<TeamFormProps> = ({ isEdit = false }) => {
                   </Col>
                 </Row>
                 <div className='d-flex justify-content-end gap-2'>
-                  <Button type='submit' variant='secondary'>
+                  <Button type='submit' variant='secondary' style={{ backgroundColor: "#da70d6" }}>
                     {isEdit ? "Update Member" : "Add Member"}
                   </Button>
                   <Button variant='danger' onClick={() => navigate("/")}>

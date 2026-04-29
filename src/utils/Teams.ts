@@ -1,5 +1,16 @@
 import type { TeamMember } from "./types";
 
+// const TeamFetch = async (): Promise<TeamMember[]> => {
+//   const res = await fetch("data/db.json");
+
+//   if (!res.ok) {
+//     throw new Error("Failed to fetch team data");
+//   }
+//   const teams: TeamMember[] = await res.json();
+
+//   return teams;
+// };
+
 export const teams: TeamMember[] = [
   {
     id: "1",

@@ -8,6 +8,7 @@ import useTeamStore, { teamSelector } from "../store/teamStore";
 import type { TeamMember } from "../utils/types";
 import { toast } from "react-toastify";
 import Analytics from "../components/Analytics";
+import Filter from "../components/Filter";
 
 const TeamList = () => {
   const navigate = useNavigate();
@@ -32,6 +33,22 @@ const TeamList = () => {
     }
   };
 
+  // filter
+  const filters = ["All", "Online", "Offline", "Away"];
+  const [activeFilter, setActiveFilter] = useState<string>("All");
+
+  const handleFilterClick = (filter: string) => {
+    setActiveFilter(filter);
+  };
+
+  const filteredTeams = teams.filter((team) => {
+    if (activeFilter === "All") return true;
+    if (activeFilter === "Online") return team.status === "online";
+    if (activeFilter === "Offline") return team.status === "offline";
+    if (activeFilter === "Away") return team.status === "away";
+    return true;
+  });
+
   return (
     <Container fluid className='py-4'>
       <div className='d-flex justify-content-between align-items-center mb-4'>
@@ -40,17 +57,30 @@ const TeamList = () => {
           <p className='text-muted mb-0 small fst-italic'>Manage and organize your team members</p>
         </div>
 
-        <Button className='d-flex align-items-center gap-2' onClick={() => navigate("/add")}>
-          <Plus size={18} />
-          <span className='d-none d-sm-inline'>Add New Member</span>
-          <span className='d-sm-none'>Add</span>
-        </Button>
+        <div className='d-flex align-items-center gap-3 justify-content-end flex-wrap'>
+          <span className='rounded-pill p-1 align-items-center justify-content-center d-flex border'>
+            {filters.map((filter) => (
+              <Filter
+                key={filter}
+                label={filter}
+                active={activeFilter === filter}
+                onClick={() => handleFilterClick(filter)}
+              />
+            ))}
+          </span>
+
+          <Button className='d-flex align-items-center gap-2' onClick={() => navigate("/add")}>
+            <Plus size={18} />
+            <span className='d-none d-sm-inline'>Add New Member</span>
+            <span className='d-sm-none'>Add</span>
+          </Button>
+        </div>
       </div>
       <div>
         <Analytics />
       </div>
 
-      {teams.length === 0 ? (
+      {filteredTeams.length === 0 ? (
         <div className='empty-state text-center py-5'>
           <div className='empty-icon mb-3'>
             <Users size={42} />
@@ -67,7 +97,7 @@ const TeamList = () => {
         </div>
       ) : (
         <Row className='p-4 mx-auto'>
-          {teams.map((team) => (
+          {filteredTeams.map((team) => (
             <Col key={team.id} xs={12} md={6} lg={4} className='mb-4'>
               <CardList team={team} handleDelete={handleDelete} />
             </Col>
